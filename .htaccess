@@ -1,0 +1,12 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(assets|uploads)/.*\.(php[0-9]?|phtml|phar)$ - [F,L,NC]
+RewriteRule ^(assets|uploads)/(.*)$ public/$1/$2 [END,NC]
+RewriteRule ^(app|bootstrap|config|controllers|core|database|legacy-config|models|public|resources|routes|storage|tests|vendor|views)(/|$) - [F,L,NC]
+RewriteRule ^(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md|database\.sql)$ - [F,L,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+<FilesMatch "^\.|\.sql$">
+  Require all denied
+</FilesMatch>
